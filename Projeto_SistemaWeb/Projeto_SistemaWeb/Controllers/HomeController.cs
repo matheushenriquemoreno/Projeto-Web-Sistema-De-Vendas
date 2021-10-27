@@ -10,14 +10,15 @@ namespace Projeto_SistemaWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index() // o nome do metodo e mapeado para ação
         {
             return View();
         }
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Salles web MVc app from C# Course";
+            ViewData["Professor"] = "Matheus Henrique";
 
             return View();
         }
