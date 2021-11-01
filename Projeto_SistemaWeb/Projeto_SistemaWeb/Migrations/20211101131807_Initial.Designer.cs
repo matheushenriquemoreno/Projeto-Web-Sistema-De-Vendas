@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Projeto_SistemaWeb.Data;
+using Projeto_SistemaWeb.Models;
 
 namespace Projeto_SistemaWeb.Migrations
 {
