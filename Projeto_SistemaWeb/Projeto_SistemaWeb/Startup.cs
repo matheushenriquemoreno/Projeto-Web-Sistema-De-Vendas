@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Projeto_SistemaWeb.Models;
 using Projeto_SistemaWeb.Data;
+using Projeto_SistemaWeb.Services;
 
 namespace Projeto_SistemaWeb
 {
@@ -42,6 +43,8 @@ namespace Projeto_SistemaWeb
                         builder.MigrationsAssembly("Projeto_SistemaWeb")));
 
             services.AddScoped<SeedingService>(); // registrando o nosso servico no sistema de injeção de dependencia na aplicação.
+            services.AddScoped<SellerServices>(); 
+
         }
 
         // configura questao relacinadas ao comportamento das requisicoes / pipeline htpp
