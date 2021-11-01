@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Projeto_SistemaWeb.Models;
+using Projeto_SistemaWeb.Models.ViewMoldes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,7 +15,7 @@ namespace Projeto_SistemaWeb.Controllers
         {
             return View();
         }
-
+         
         public IActionResult About()
         {
             ViewData["Message"] = "Salles web MVc app from C# Course";

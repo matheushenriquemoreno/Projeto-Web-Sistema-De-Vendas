@@ -1,6 +1,6 @@
 using System;
 
-namespace Projeto_SistemaWeb.Models
+namespace Projeto_SistemaWeb.Models.ViewMoldes
 {
     public class ErrorViewModel
     {
