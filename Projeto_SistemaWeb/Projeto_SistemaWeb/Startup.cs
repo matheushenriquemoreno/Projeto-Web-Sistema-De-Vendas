@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Projeto_SistemaWeb.Models;
+using Projeto_SistemaWeb.Data;
 
 namespace Projeto_SistemaWeb
 {
@@ -39,14 +40,17 @@ namespace Projeto_SistemaWeb
             services.AddDbContext<Projeto_SistemaWebContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("Projeto_SistemaWebContext"), builder =>
                         builder.MigrationsAssembly("Projeto_SistemaWeb")));
+
+            services.AddScoped<SeedingService>(); // registrando o nosso servico no sistema de injeção de dependencia na aplicação.
         }
 
         // configura questao relacinadas ao comportamento das requisicoes / pipeline htpp
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seendingService) // 
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment()) 
             {
                 app.UseDeveloperExceptionPage();
+                seendingService.Seed();
             }
             else
             {
