@@ -20,6 +20,11 @@ namespace Projeto_SistemaWeb.Services
             return _context.Seller.ToList(); 
         }
 
+        public void Inserir(Seller vendedor)
+        {
+            _context.Add(vendedor);
+            _context.SaveChanges();
+        }
 
     }
 }

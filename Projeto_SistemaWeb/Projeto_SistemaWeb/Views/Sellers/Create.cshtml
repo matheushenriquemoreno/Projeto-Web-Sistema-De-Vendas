@@ -1,0 +1,40 @@
+﻿@model Projeto_SistemaWeb.Models.Seller
+
+@{
+    ViewData["Title"]= "Create";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Funcionario</h4>
+<hr />
+
+<div class="row">
+
+    <div class="col-md-5">
+
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Name" class="form-control-static"></label> <br />
+                <input asp-for="Name" calss="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="form-control-static"></label> <br />
+                <input asp-for="Email" calss="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DataNascimento" class="form-control-static"></label> <br />
+                <input asp-for="DataNascimento" calss="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="SalarioBase" class="form-control-static"></label><br />
+                <input asp-for="SalarioBase" calss="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+
+        </form>
+
+    </div>
+</div>
