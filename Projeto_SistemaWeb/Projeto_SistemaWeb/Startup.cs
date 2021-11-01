@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Projeto_SistemaWeb.Data;
 
 namespace Projeto_SistemaWeb
 {
@@ -33,6 +35,10 @@ namespace Projeto_SistemaWeb
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<Projeto_SistemaWebContext>(options =>
+                    options.UseMySql(Configuration.GetConnectionString("Projeto_SistemaWebContext"), builder =>
+                        builder.MigrationsAssembly("Projeto_SistemaWeb")));
         }
 
         // configura questao relacinadas ao comportamento das requisicoes / pipeline htpp
