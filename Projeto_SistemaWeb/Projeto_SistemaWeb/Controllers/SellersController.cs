@@ -41,5 +41,29 @@ namespace Projeto_SistemaWeb.Controllers
             _seller.Inserir(seller);
             return RedirectToAction(nameof(Index)); // redirecinando para tela principal nameof = melhora a manuntenção do sistema
         }
+
+        public IActionResult Delete(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _seller.FindById(id.Value);
+            if(obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _seller.Remove(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
