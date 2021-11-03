@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Projeto_SistemaWeb.Models;
 using Microsoft.EntityFrameworkCore;
+using Projeto_SistemaWeb.Services.Exceptions;
 
 namespace Projeto_SistemaWeb.Services
 {
@@ -40,6 +41,22 @@ namespace Projeto_SistemaWeb.Services
             _context.SaveChanges();
         }
 
+        public void Update(Seller vendedor)
+        {
+            if(!_context.Seller.Any(x => x.Id == vendedor.Id))
+            {
+                throw new NotFounException("Id não encontrado!!");
+            }
+            try
+            {
+                _context.Update(vendedor);
+                _context.SaveChanges();
+            }
+            catch(DbUpdateConcurrencyException e) // pegando uma esseção nivel de acesso a dados
+            {
+                throw new DbConcurrencyException(e.Message); // relaçando a nivel de Serviço
+            }
+        }
 
     }
 }

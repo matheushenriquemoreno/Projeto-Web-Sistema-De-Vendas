@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Projeto_SistemaWeb.Services;
 using Projeto_SistemaWeb.Models;
 using Projeto_SistemaWeb.Models.ViewMoldes;
+using Projeto_SistemaWeb.Services.Exceptions;
 
 namespace Projeto_SistemaWeb.Controllers
 {
@@ -81,6 +82,47 @@ namespace Projeto_SistemaWeb.Controllers
 
             return View(obj);
 
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if( id == null)
+            {
+                return NotFound();
+            }
+            var obj = _seller.FindById(id.Value);
+            if(obj == null)
+            {
+                return NotFound();
+            }
+
+            List<Department> listdepartamentos = _departmentService.FindAll();
+            SellerFormViewMoldel viewModel = new SellerFormViewMoldel { Seller = obj, Departments = listdepartamentos };
+            return View(viewModel);
+            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Seller seller)
+        {
+            if(id != seller.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _seller.Update(seller);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFounException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
 
     }
