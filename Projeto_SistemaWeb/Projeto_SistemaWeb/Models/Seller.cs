@@ -12,6 +12,7 @@ namespace Projeto_SistemaWeb.Models
         public DateTime DataNascimento { get; set; }
         public double SalarioBase { get; set; }
         public Department Departamento { get; set; }
+        public int DepartmentId { get; set; }
         public ICollection<RegistroDeVenda> Vendas { get; set; } = new List<RegistroDeVenda>();
 
 

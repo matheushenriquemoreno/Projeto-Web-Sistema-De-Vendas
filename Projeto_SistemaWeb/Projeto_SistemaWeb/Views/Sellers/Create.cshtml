@@ -1,4 +1,4 @@
-﻿@model Projeto_SistemaWeb.Models.Seller
+﻿@model Projeto_SistemaWeb.Models.ViewMoldes.SellerFormViewMoldel
 
 @{
     ViewData["Title"]= "Create";
@@ -15,20 +15,25 @@
 
         <form asp-action="Create">
             <div class="form-group">
-                <label asp-for="Name" class="form-control-static"></label> <br />
-                <input asp-for="Name" calss="form-control" />
+                <label asp-for="Seller.Name" class="form-control-static"></label> <br />
+                <input asp-for="Seller.Name" calss="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="form-control-static"></label> <br />
-                <input asp-for="Email" calss="form-control" />
+                <label asp-for="Seller.Email" class="form-control-static"></label> <br />
+                <input asp-for="Seller.Email" calss="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="DataNascimento" class="form-control-static"></label> <br />
-                <input asp-for="DataNascimento" calss="form-control" />
+                <label asp-for="Seller.DataNascimento" class="form-control-static"></label> <br />
+                <input asp-for="Seller.DataNascimento" calss="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="SalarioBase" class="form-control-static"></label><br />
-                <input asp-for="SalarioBase" calss="form-control" />
+                <label asp-for="Seller.SalarioBase" class="form-control-static"></label><br />
+                <input asp-for="Seller.SalarioBase" calss="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.DepartmentId" class="control-label"></label>
+                <select asp-for="Seller.DepartmentId" asp-items="@(new SelectList(Model.Departments,"Id", "Name"))" class="form-control"></select>
+                <!-- asp-items = controi os intens de uma caixa de seleção conforme os itens que for passado -->
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

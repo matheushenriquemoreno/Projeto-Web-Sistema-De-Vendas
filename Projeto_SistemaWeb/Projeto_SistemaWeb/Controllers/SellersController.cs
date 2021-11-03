@@ -5,16 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Projeto_SistemaWeb.Services;
 using Projeto_SistemaWeb.Models;
+using Projeto_SistemaWeb.Models.ViewMoldes;
 
 namespace Projeto_SistemaWeb.Controllers
 {
     public class SellersController : Controller
     {
         private readonly SellerServices _seller;
-        
-       public SellersController(SellerServices sellerServices)
+        private readonly DepartmentService _departmentService;
+
+       public SellersController(SellerServices sellerServices, DepartmentService departamento)
         {
             _seller = sellerServices;
+            _departmentService = departamento;
         }
 
 
@@ -26,14 +29,17 @@ namespace Projeto_SistemaWeb.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var listdepartments = _departmentService.FindAll();
+            var viewMoldel = new SellerFormViewMoldel { Departments = listdepartments };
+            return View(viewMoldel);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+
+        [HttpPost] // indica ação de Post não de Get
+        [ValidateAntiForgeryToken] // previne ataques csrf
         public IActionResult Create(Seller seller) // pega o vendedor que veio da requisição de cadastro
         {
             _seller.Inserir(seller);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index)); // redirecinando para tela principal nameof = melhora a manuntenção do sistema
         }
     }
 }
