@@ -7,6 +7,7 @@ using Projeto_SistemaWeb.Services;
 using Projeto_SistemaWeb.Models;
 using Projeto_SistemaWeb.Models.ViewMoldes;
 using Projeto_SistemaWeb.Services.Exceptions;
+using System.Diagnostics;
 
 namespace Projeto_SistemaWeb.Controllers
 {
@@ -47,13 +48,13 @@ namespace Projeto_SistemaWeb.Controllers
         {
             if(id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
 
             var obj = _seller.FindById(id.Value);
             if(obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não exite!" });
             }
 
             return View(obj);
@@ -71,13 +72,13 @@ namespace Projeto_SistemaWeb.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
 
             var obj = _seller.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não exite" });
             }
 
             return View(obj);
@@ -88,12 +89,12 @@ namespace Projeto_SistemaWeb.Controllers
         {
             if( id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não providenciado!" });
             }
             var obj = _seller.FindById(id.Value);
             if(obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não exite!" });
             }
 
             List<Department> listdepartamentos = _departmentService.FindAll();
@@ -108,21 +109,28 @@ namespace Projeto_SistemaWeb.Controllers
         {
             if(id != seller.Id)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = "Ids não correspondem!" });
             }
             try
             {
                 _seller.Update(seller);
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFounException)
+            catch (ApplicationException e) // por meio de upcasting as 2 excessoes criadas passam
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            catch (DbConcurrencyException)
+
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
             {
-                return BadRequest();
-            }
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier // pega o id interno da requisição
+            };
+            return View(viewModel);
         }
 
     }
