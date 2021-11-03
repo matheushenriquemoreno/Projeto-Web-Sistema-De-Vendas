@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Projeto_SistemaWeb.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace Projeto_SistemaWeb.Services
 {
     public class SellerServices
@@ -28,7 +30,7 @@ namespace Projeto_SistemaWeb.Services
 
         public Seller FindById(int id)
         {
-            return _context.Seller.FirstOrDefault(obj => obj.Id == id);
+            return _context.Seller.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Remove(int id)
