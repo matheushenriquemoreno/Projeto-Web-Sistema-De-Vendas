@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Projeto_SistemaWeb.Models;
 using Projeto_SistemaWeb.Data;
 using Projeto_SistemaWeb.Services;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace Projeto_SistemaWeb
 {
@@ -51,6 +53,17 @@ namespace Projeto_SistemaWeb
         // configura questao relacinadas ao comportamento das requisicoes / pipeline htpp
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seendingService) // 
         {
+
+            var enUs = new CultureInfo("en-US");
+            var localizacaoOption = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(enUs),
+                SupportedCultures = new List<CultureInfo> { enUs },
+                SupportedUICultures = new List<CultureInfo> { enUs }
+            };
+
+            app.UseRequestLocalization(localizacaoOption);
+
             if (env.IsDevelopment()) 
             {
                 app.UseDeveloperExceptionPage();

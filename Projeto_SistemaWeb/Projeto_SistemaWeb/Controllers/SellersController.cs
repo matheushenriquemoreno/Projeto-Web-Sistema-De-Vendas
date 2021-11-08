@@ -36,10 +36,25 @@ namespace Projeto_SistemaWeb.Controllers
             return View(viewMoldel);
         }
 
+        /*
+         
+         */
+
         [HttpPost] // indica ação de Post não de Get
         [ValidateAntiForgeryToken] // previne ataques csrf
         public IActionResult Create(Seller seller) // pega o vendedor que veio da requisição de cadastro
         {
+            /*
+             http://www.macoratti.net/15/09/mvc_mdlst1.htm => sobre o ModelState.IsValid
+             */
+
+            if (!ModelState.IsValid) // previne que o usuario faça a criação  de um novo usuario sem as regras de negocios inposta.
+            {
+                var departamento = _departmentService.FindAll();
+                var viewModel = new SellerFormViewMoldel { Seller = seller, Departments = departamento };
+                return View(viewModel);
+            }
+
             _seller.Inserir(seller);
             return RedirectToAction(nameof(Index)); // redirecinando para tela principal nameof = melhora a manuntenção do sistema
         }
@@ -107,7 +122,14 @@ namespace Projeto_SistemaWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Seller seller)
         {
-            if(id != seller.Id)
+            if (!ModelState.IsValid) // previne que o usuario faça a edição dos dados sem as regras de negocios inpostas
+            {
+                var departamento = _departmentService.FindAll();
+                var viewModel = new SellerFormViewMoldel { Seller = seller, Departments = departamento };
+                return View(viewModel);
+            }
+
+            if (id != seller.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Ids não correspondem!" });
             }
