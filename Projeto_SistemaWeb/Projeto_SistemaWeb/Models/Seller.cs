@@ -11,7 +11,7 @@ namespace Projeto_SistemaWeb.Models
 
         [Required(ErrorMessage ="{0} Obrigatorio!")]
         [StringLength(60,MinimumLength = 3, ErrorMessage = "{0} Tamanho maximo Entre {2} e {1} caracteres")]
-        [Display(Name = "Nome")]
+       
         public string Name { get; set; }
 
         

@@ -23,26 +23,22 @@ namespace Projeto_SistemaWeb.Controllers
         }
 
 
-        public IActionResult Index()
+        public  async Task<IActionResult> Index()
         {
-            var list = _seller.FindAll();
+            var list = await _seller.FindAllAsync();
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var listdepartments = _departmentService.FindAll();
+            var listdepartments = await _departmentService.FindAllAsync();
             var viewMoldel = new SellerFormViewMoldel { Departments = listdepartments };
             return View(viewMoldel);
         }
 
-        /*
-         
-         */
-
         [HttpPost] // indica ação de Post não de Get
         [ValidateAntiForgeryToken] // previne ataques csrf
-        public IActionResult Create(Seller seller) // pega o vendedor que veio da requisição de cadastro
+        public async Task<IActionResult> Create(Seller seller) // pega o vendedor que veio da requisição de cadastro
         {
             /*
              http://www.macoratti.net/15/09/mvc_mdlst1.htm => sobre o ModelState.IsValid
@@ -50,23 +46,24 @@ namespace Projeto_SistemaWeb.Controllers
 
             if (!ModelState.IsValid) // previne que o usuario faça a criação  de um novo usuario sem as regras de negocios inposta.
             {
-                var departamento = _departmentService.FindAll();
+                var departamento = await _departmentService.FindAllAsync();
                 var viewModel = new SellerFormViewMoldel { Seller = seller, Departments = departamento };
                 return View(viewModel);
             }
 
-            _seller.Inserir(seller);
+            await _seller.InserirAsync(seller);
             return RedirectToAction(nameof(Index)); // redirecinando para tela principal nameof = melhora a manuntenção do sistema
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if(id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
 
-            var obj = _seller.FindById(id.Value);
+            var obj = await _seller.EncontraPorIDAsync(id.Value);
+
             if(obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não exite!" });
@@ -77,20 +74,20 @@ namespace Projeto_SistemaWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _seller.Remove(id);
+            await _seller.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
 
-            var obj = _seller.FindById(id.Value);
+            var obj = await _seller.EncontraPorIDAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não exite" });
@@ -100,19 +97,19 @@ namespace Projeto_SistemaWeb.Controllers
 
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if( id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não providenciado!" });
             }
-            var obj = _seller.FindById(id.Value);
+            var obj = await _seller.EncontraPorIDAsync(id.Value);
             if(obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não exite!" });
             }
 
-            List<Department> listdepartamentos = _departmentService.FindAll();
+            List<Department> listdepartamentos = await _departmentService.FindAllAsync();
             SellerFormViewMoldel viewModel = new SellerFormViewMoldel { Seller = obj, Departments = listdepartamentos };
             return View(viewModel);
             
@@ -120,11 +117,11 @@ namespace Projeto_SistemaWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Seller seller)
+        public async Task<IActionResult> Edit(int id, Seller seller)
         {
             if (!ModelState.IsValid) // previne que o usuario faça a edição dos dados sem as regras de negocios inpostas
             {
-                var departamento = _departmentService.FindAll();
+                var departamento = await _departmentService.FindAllAsync();
                 var viewModel = new SellerFormViewMoldel { Seller = seller, Departments = departamento };
                 return View(viewModel);
             }
@@ -135,7 +132,7 @@ namespace Projeto_SistemaWeb.Controllers
             }
             try
             {
-                _seller.Update(seller);
+                await _seller.UpdateAsync(seller);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e) // por meio de upcasting as 2 excessoes criadas passam

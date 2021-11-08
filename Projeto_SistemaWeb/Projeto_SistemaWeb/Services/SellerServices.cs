@@ -18,43 +18,45 @@ namespace Projeto_SistemaWeb.Services
             _context = context;
         }
         
-        public List<Seller> FindAll() //  Encontrar todos os vendedores
+        public async Task<List<Seller>> FindAllAsync() //  Encontrar todos os vendedores
         {
-            return _context.Seller.ToList(); 
+            return await _context.Seller.ToListAsync(); 
         }
 
-        public void Inserir(Seller vendedor)
+        public async Task InserirAsync(Seller vendedor)
         {
             _context.Add(vendedor);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Seller FindById(int id)
+        public async Task<Seller> EncontraPorIDAsync(int id)
         {
-            return _context.Seller.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.Id == id);
+            return await _context.Seller.Include(obj => obj.Departamento).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Seller.Find(id);
+            var obj = await _context.Seller.FindAsync(id);
             _context.Seller.Remove(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Seller vendedor)
+        public async Task UpdateAsync(Seller vendedor)
         {
-            if(!_context.Seller.Any(x => x.Id == vendedor.Id))
+            bool TemAlgum = await _context.Seller.AnyAsync(x => x.Id == vendedor.Id);
+
+            if (!TemAlgum)
             {
                 throw new NotFounException("Id não encontrado!!");
             }
             try
             {
                 _context.Update(vendedor);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
             }
             catch(DbUpdateConcurrencyException e) // pegando uma esseção nivel de acesso a dados
             {
-                throw new DbConcurrencyException(e.Message); // relaçando a nivel de Serviço
+                throw new DbConcurrencyException(e.Message); // relançando a nivel de Serviço
             }
         }
 
