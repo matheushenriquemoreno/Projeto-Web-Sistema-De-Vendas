@@ -76,8 +76,16 @@ namespace Projeto_SistemaWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _seller.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _seller.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch(IntegridadeDeAcessoException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
+
         }
 
         public async Task<IActionResult> Details(int? id)
