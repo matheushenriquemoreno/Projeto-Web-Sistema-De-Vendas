@@ -38,9 +38,23 @@ namespace Projeto_SistemaWeb.Controllers
             return View(rerultado);
         }
 
-        public IActionResult BuscaEmGrupo()
+        public async Task<IActionResult> BuscaEmGrupo(DateTime? dataMinima, DateTime? dataMaxima)
         {
-            return View();
+
+            if (!dataMinima.HasValue)
+            {
+                dataMinima = new DateTime(DateTime.Now.Year, 1, 1);
+            }
+            if (!dataMaxima.HasValue)
+            {
+                dataMaxima = DateTime.Now;
+            }
+            ViewData["dataMinima"] = dataMinima.Value.ToString("yyyy-MM-dd");
+            ViewData["dataMaxima"] = dataMaxima.Value.ToString("yyyy-MM-dd");
+
+            var rerultado = await _registroVendaService.BuscaPorDataGrupoAsync(dataMinima, dataMaxima);
+            return View(rerultado);
         }
+  
     }
 }

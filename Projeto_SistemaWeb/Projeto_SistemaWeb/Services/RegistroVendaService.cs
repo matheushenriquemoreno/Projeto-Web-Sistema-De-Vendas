@@ -37,5 +37,27 @@ namespace Projeto_SistemaWeb.Services
                     .ToListAsync();
 
         }
+
+
+        public async Task<List<IGrouping<Department, RegistroDeVenda>>> BuscaPorDataGrupoAsync(DateTime? dataMinima, DateTime? DataMaxima)
+        {
+            var resultado = from obj in _context.RegistroDeVendas select obj; 
+
+            if (dataMinima.HasValue)
+            {
+                resultado = resultado.Where(x => x.Data >= dataMinima.Value);
+            }
+            if (DataMaxima.HasValue)
+            {
+                resultado = resultado.Where(x => x.Data <= DataMaxima.Value);
+            }
+
+            return await resultado
+                    .Include(x => x.Vendedor) 
+                    .Include(x => x.Vendedor.Departamento) 
+                    .OrderByDescending(x => x.Data)
+                    .GroupBy(x => x.Vendedor.Departamento)
+                    .ToListAsync();
+        }
     }
 }
