@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Projeto_SistemaWeb.Services;
 using Projeto_SistemaWeb.Models;
@@ -96,6 +95,7 @@ namespace Projeto_SistemaWeb.Controllers
             }
 
             var obj = await _seller.EncontraPorIDAsync(id.Value);
+
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não exite" });
@@ -112,6 +112,7 @@ namespace Projeto_SistemaWeb.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id não providenciado!" });
             }
             var obj = await _seller.EncontraPorIDAsync(id.Value);
+
             if(obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não exite!" });
@@ -149,7 +150,6 @@ namespace Projeto_SistemaWeb.Controllers
             }
 
         }
-
         public IActionResult Error(string message)
         {
             var viewModel = new ErrorViewModel
