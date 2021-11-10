@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Sales Records";
 }
 
@@ -11,20 +10,20 @@
             <fieldset>
                 <legend>Busca Simples</legend>
                 <div class="form-group">
-                    <label for="minDate" class="col-lg-2 control-label">Data minima</label>
+                    <label for="dataMinima" class="col-lg-2 control-label">Data minima</label>
                     <div class="col-lg-10">
-                        <input type="date" name="minDate" class="form-control" />
+                        <input type="date" name="dataMinima" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="maxDate" class="col-lg-2 control-label">Data maxima</label>
+                    <label for="DataMaxima" class="col-lg-2 control-label">Data maxima</label>
                     <div class="col-lg-10">
-                        <input type="date" name="maxDate" class="form-control" />
+                        <input type="date" name="DataMaxima" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button> <!-- envia a ção pro asp-action="BuscaSimples" -->
                     </div>
                 </div>
             </fieldset>

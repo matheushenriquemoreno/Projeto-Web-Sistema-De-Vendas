@@ -19,7 +19,7 @@ namespace Projeto_SistemaWeb.Data
         {
             if(_context.Department.Any() || _context.Seller.Any() || _context.RegistroDeVendas.Any())
             {
-                return; // Bando de dados ja foi populado.
+                return; // Banco de dados ja foi populado.
             }
 
             Department d1 = new Department(1, "Computadores e Informática");

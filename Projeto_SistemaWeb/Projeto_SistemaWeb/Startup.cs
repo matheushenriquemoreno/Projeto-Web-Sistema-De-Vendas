@@ -47,6 +47,7 @@ namespace Projeto_SistemaWeb
             services.AddScoped<SeedingService>(); // registrando o nosso servico no sistema de injeção de dependencia na aplicação.
             services.AddScoped<SellerServices>();
             services.AddScoped<DepartmentService>();
+            services.AddScoped<RegistroVendaService>();
 
         }
 
