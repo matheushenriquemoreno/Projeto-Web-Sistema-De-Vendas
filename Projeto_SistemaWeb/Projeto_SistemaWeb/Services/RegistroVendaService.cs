@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Projeto_SistemaWeb.Models.Enums;
 
 namespace Projeto_SistemaWeb.Services
 {
@@ -23,19 +24,18 @@ namespace Projeto_SistemaWeb.Services
             
             if (dataMinima.HasValue)
             {
-                resultado = resultado.Where(x => x.Data >= dataMinima.Value);
+                resultado = resultado.Where(x => x.Data >= dataMinima.Value && x.Status == StatusVenda.Faturado);
             }
             if (DataMaxima.HasValue)
             {
-                resultado = resultado.Where(x => x.Data <= DataMaxima.Value);
+                resultado = resultado.Where(x => x.Data <= DataMaxima.Value && x.Status == StatusVenda.Faturado);
             }
 
             return await resultado
                     .Include(x => x.Vendedor) // fazendo um join com a tabela vendedor
                     .Include(x => x.Vendedor.Departamento) // fazendo um join com a tabela departamento
-                    .OrderByDescending(x => x.Data)
+                    .OrderBy(x => x.Vendedor.Name)
                     .ToListAsync();
-
         }
 
 

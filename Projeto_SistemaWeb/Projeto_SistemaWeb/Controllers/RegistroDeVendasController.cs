@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using Projeto_SistemaWeb.Services;
+using System.Linq;
 
 namespace Projeto_SistemaWeb.Controllers
 {
@@ -21,7 +22,7 @@ namespace Projeto_SistemaWeb.Controllers
         public async Task<IActionResult> BuscaSimples(DateTime? dataMinima, DateTime? dataMaxima)
         {
 
-            if(!dataMinima.HasValue)
+            if(!dataMinima.HasValue) // HasValue verifica se o resultado e de outro tipo do comparado se for retorna false 
             {
                 dataMinima = new DateTime(DateTime.Now.Year, 1, 1);
             }

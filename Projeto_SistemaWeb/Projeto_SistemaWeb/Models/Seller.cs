@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Projeto_SistemaWeb.Models.Enums;
 
 namespace Projeto_SistemaWeb.Models
 {
@@ -11,7 +12,6 @@ namespace Projeto_SistemaWeb.Models
 
         [Required(ErrorMessage ="{0} Obrigatorio!")]
         [StringLength(60,MinimumLength = 3, ErrorMessage = "{0} Tamanho maximo Entre {2} e {1} caracteres")]
-       
         public string Name { get; set; }
 
         
@@ -66,7 +66,7 @@ namespace Projeto_SistemaWeb.Models
 
         public double TotalVendas(DateTime inicial, DateTime final)
         {                      // compara se a data da venda ta dentro do espaço tempo requerido pelo usuario.
-            return Vendas.Where(sr => sr.Data >= inicial && sr.Data <= final).Sum(sr => sr.Quantia);
+            return Vendas.Where(sr => sr.Data >= inicial && sr.Data <= final && sr.Status == StatusVenda.Faturado).Sum(sr => sr.Quantia);
         }
 
     }
