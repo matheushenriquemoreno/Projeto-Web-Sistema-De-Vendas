@@ -24,17 +24,18 @@ namespace Projeto_SistemaWeb.Controllers
 
             if(!dataMinima.HasValue) // HasValue verifica se o resultado e de outro tipo do comparado se for retorna false 
             {
-                dataMinima = new DateTime(DateTime.Now.Year, 1, 1);
+                dataMinima = new DateTime(2018, 1, 1);
             }
             if (!dataMaxima.HasValue)
             {
                 dataMaxima = DateTime.Now;
             }
+
             ViewData["dataMinima"] = dataMinima.Value.ToString("yyyy-MM-dd");
             ViewData["dataMaxima"] = dataMaxima.Value.ToString("yyyy-MM-dd");
 
-            var rerultado = await _registroVendaService.BuscaPorDataAsync(dataMinima, dataMaxima);
-            return View(rerultado);
+            var resultado = await _registroVendaService.BuscaPorDataAsync(dataMinima, dataMaxima);
+            return View(resultado);
         }
 
         public async Task<IActionResult> BuscaEmGrupo(DateTime? dataMinima, DateTime? dataMaxima)
@@ -42,17 +43,18 @@ namespace Projeto_SistemaWeb.Controllers
 
             if (!dataMinima.HasValue)
             {
-                dataMinima = new DateTime(DateTime.Now.Year, 1, 1);
+                dataMinima = new DateTime(2018, 1, 1);
             }
             if (!dataMaxima.HasValue)
             {
                 dataMaxima = DateTime.Now;
             }
+
             ViewData["dataMinima"] = dataMinima.Value.ToString("yyyy-MM-dd");
             ViewData["dataMaxima"] = dataMaxima.Value.ToString("yyyy-MM-dd");
 
-            var rerultado = await _registroVendaService.BuscaPorDataGrupoAsync(dataMinima, dataMaxima);
-            return View(rerultado);
+            var resultado = await _registroVendaService.BuscaPorDataGrupoAsync(dataMinima, dataMaxima);
+            return View(resultado);
         }
   
     }

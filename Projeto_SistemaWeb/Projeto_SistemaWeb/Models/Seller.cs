@@ -66,7 +66,7 @@ namespace Projeto_SistemaWeb.Models
 
         public double TotalVendas(DateTime inicial, DateTime final)
         {                      // compara se a data da venda ta dentro do espaço tempo requerido pelo usuario.
-            return Vendas.Where(sr => sr.Data >= inicial && sr.Data <= final && sr.Status == StatusVenda.Faturado).Sum(sr => sr.Quantia);
+            return Vendas.Where(venda => venda.Data >= inicial && venda.Data <= final && venda.Status == StatusVenda.Faturado).Sum(venda => venda.Quantia);
         }
 
     }

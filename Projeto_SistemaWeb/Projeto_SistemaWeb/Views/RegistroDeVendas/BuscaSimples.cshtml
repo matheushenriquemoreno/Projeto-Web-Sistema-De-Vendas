@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Projeto_SistemaWeb.Models.RegistroDeVenda>
+@using Projeto_SistemaWeb.Models.Enums;
 
 @{
     ViewData["Title"] = "Busca Simples";
@@ -77,6 +78,8 @@
         </table>
     </div>
     <div class="panel-heading">
-        <h3 class="panel-title text-center">Soma Total das vendas validas = $@Model.Sum(obj => obj.Quantia).ToString("F2") @Model. </h3>
+        <h3 class="panel-title text-center">Total de vendas Faturadas = $@Model.Where(venda => venda.Status == StatusVenda.Faturado).Sum(obj => obj.Quantia).ToString("F2")</h3>
+        <h3 class="panel-title text-center">Total de vendas Pendentes = $@Model.Where(venda => venda.Status == StatusVenda.Pendente).Sum(obj => obj.Quantia).ToString("F2")</h3>
+        <h3 class="panel-title text-center">Total de vendas Canceladas = $@Model.Where(venda => venda.Status == StatusVenda.Cancelado).Sum(obj => obj.Quantia).ToString("F2")</h3>
     </div>
 </div>

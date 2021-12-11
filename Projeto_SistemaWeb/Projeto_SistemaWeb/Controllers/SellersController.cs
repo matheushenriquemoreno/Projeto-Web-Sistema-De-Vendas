@@ -35,7 +35,7 @@ namespace Projeto_SistemaWeb.Controllers
             return View(viewMoldel);
         }
 
-        [HttpPost] // indica ação de Post não de Get
+        [HttpPost] // indica ação de Post
         [ValidateAntiForgeryToken] // previne ataques csrf
         public async Task<IActionResult> Create(Seller seller) // pega o vendedor que veio da requisição de cadastro
         {

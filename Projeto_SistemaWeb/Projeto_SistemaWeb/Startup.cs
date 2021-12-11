@@ -32,14 +32,15 @@ namespace Projeto_SistemaWeb
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                //Esta lambda determina se o consentimento do usuário para cookies não essenciais é necessário para uma determinada solicitação.
+
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            /* coneção com o banco de dados mysql */
             services.AddDbContext<Projeto_SistemaWebContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("Projeto_SistemaWebContext"), builder =>
                         builder.MigrationsAssembly("Projeto_SistemaWeb")));

@@ -24,17 +24,17 @@ namespace Projeto_SistemaWeb.Services
             
             if (dataMinima.HasValue)
             {
-                resultado = resultado.Where(x => x.Data >= dataMinima.Value && x.Status == StatusVenda.Faturado);
+                resultado = resultado.Where(x => x.Data >= dataMinima.Value);
             }
             if (DataMaxima.HasValue)
             {
-                resultado = resultado.Where(x => x.Data <= DataMaxima.Value && x.Status == StatusVenda.Faturado);
+                resultado = resultado.Where(x => x.Data <= DataMaxima.Value);
             }
 
             return await resultado
                     .Include(x => x.Vendedor) // fazendo um join com a tabela vendedor
                     .Include(x => x.Vendedor.Departamento) // fazendo um join com a tabela departamento
-                    .OrderBy(x => x.Vendedor.Name)
+                    .OrderBy(x => x.Vendedor.Id > 0)
                     .ToListAsync();
         }
 

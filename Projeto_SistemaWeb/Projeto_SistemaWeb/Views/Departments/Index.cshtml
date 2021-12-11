@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Projeto_SistemaWeb.Models.Department>
+﻿@model IEnumerable<Projeto_SistemaWeb.Models.Department> 
+    
+<!-- /* no controler ta retornando do banco de dados os registros de departamento, e na view ta pegando esse registro atraves da classe onde tem origem*/ -->
 
 @{
     ViewData["Title"] = "Departamento";
@@ -7,7 +9,7 @@
 <h2>@ViewData["Title"]</h2>
 
 <p>
-    <a  asp-action="Create" class="btn btn-default">Novo Departamento</a>
+    <a asp-action="Create" class="btn btn-default">Novo Departamento</a>
 </p>
 <table class="table">
     <thead>
@@ -19,16 +21,17 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" style="text-decoration: none; color: black">Editar</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id" style="text-decoration: none; color: black ">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" style="text-decoration: none; color: black">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" style="text-decoration: none; color: black ">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

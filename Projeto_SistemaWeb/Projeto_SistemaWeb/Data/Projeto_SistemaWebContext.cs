@@ -13,7 +13,7 @@ namespace Projeto_SistemaWeb.Models
             : base(options)
         {
         }
-        // DbSet<TEntity>: representa a coleção de entidades de um dado tipo em cum contexto. tipicamente corresponde a uma tabela do banco de dados.
+        // DbSet<TEntity>: representa a coleção de entidades de um dado tipo em um contexto. tipicamente corresponde a uma tabela do banco de dados.
 
         public DbSet<Department> Department { get; set; }
         public DbSet<Seller> Seller { get; set; }

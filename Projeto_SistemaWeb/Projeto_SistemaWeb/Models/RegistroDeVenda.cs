@@ -29,5 +29,6 @@ namespace Projeto_SistemaWeb.Models
             Status = status;
             Vendedor = vendedor;
         }
+
     }
 }
