@@ -34,7 +34,8 @@ Model: E onde fica as entidades do negócio, fazendo a conexão com o banco de d
 
 <h2>Video mostrando a funcionalidade do sistema: <h3/>
 
-https://user-images.githubusercontent.com/69221000/149634041-4d6e1817-ada6-42b1-9580-7058eca24665.mp4
+
+https://user-images.githubusercontent.com/69221000/149635168-1ef5e141-0092-4ac0-a461-67635f3d34e2.mp4
 
 
 <h2>Modelagem do banco de dados da aplicação</h2>
