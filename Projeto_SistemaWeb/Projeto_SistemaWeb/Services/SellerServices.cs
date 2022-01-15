@@ -31,7 +31,7 @@ namespace Projeto_SistemaWeb.Services
 
         public async Task<Seller> EncontraPorIDAsync(int id)
         {
-            return await _context.Seller.Include(obj => obj.Departamento).FirstOrDefaultAsync(obj => obj.Id == id);
+            return await _context.Seller.Include(obj => obj.Departamento).Where(obj => obj.Id == id).FirstAsync();
         }
 
         public async Task RemoveAsync(int id)

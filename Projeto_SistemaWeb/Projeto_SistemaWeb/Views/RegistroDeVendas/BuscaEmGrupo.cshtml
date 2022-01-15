@@ -13,15 +13,15 @@
         <form class="navbar-form navbar-left" role="search">  <!-- não a uma ação declarada então por padrão o framework envia pra ação vinculada a view -->
             <div class="form-group">
                 <div class="form-group">
-                    <label for="dataMinima">Data minima</label>
+                    <label  class="data_cor" for="dataMinima">Data minima</label>
                     <input type="date" class="form-control" name="dataMinima" value=@ViewData["dataMinima"] />
                 </div>
                 <div class="form-group">
-                    <label for="DataMaxima">Data maxima</label>
+                    <label class="data_cor" for="DataMaxima">Data maxima</label>
                     <input type="date" class="form-control" name="DataMaxima" value=@ViewData["DataMaxima"] />
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Filter</button>
+            <button type="submit" class="btn btn-primary">Buscar</button>
         </form>
     </div>
 </nav>

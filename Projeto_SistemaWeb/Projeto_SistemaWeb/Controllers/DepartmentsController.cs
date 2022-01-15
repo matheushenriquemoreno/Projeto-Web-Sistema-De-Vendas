@@ -1,8 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Projeto_SistemaWeb.Models;
+using Projeto_SistemaWeb.Services.Exceptions;
 
 namespace Projeto_SistemaWeb.Controllers
 {
@@ -28,8 +31,8 @@ namespace Projeto_SistemaWeb.Controllers
         }
 
         // POST: Departments/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Para se proteger de ataques de overposting, habilite as propriedades específicas que você deseja vincular
+        // http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Department department)
@@ -60,8 +63,7 @@ namespace Projeto_SistemaWeb.Controllers
         }
 
         // POST: Departments/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Department department)
@@ -102,14 +104,20 @@ namespace Projeto_SistemaWeb.Controllers
                 return NotFound();
             }
 
-            var department = await _context.Department
-                .FirstOrDefaultAsync(m => m.Id == id);
+
+            var department = await _context.Department.FirstOrDefaultAsync(m => m.Id == id);
+
             if (department == null)
             {
                 return NotFound();
             }
 
             return View(department);
+
+
+
+
+
         }
 
         // POST: Departments/Delete/5
@@ -117,15 +125,35 @@ namespace Projeto_SistemaWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var department = await _context.Department.FindAsync(id);
-            _context.Department.Remove(department);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var department = await _context.Department.FindAsync(id);
+                _context.Department.Remove(department);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Erro de integridade referencial. O Departamento em questão possue Vendedores e não pode ser excluido" });
+            }
+
         }
 
         private bool DepartmentExists(int id)
         {
             return _context.Department.Any(e => e.Id == id);
         }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier // pega o id interno da requisição
+            };
+            return View(viewModel);
+        }
+
+
     }
 }

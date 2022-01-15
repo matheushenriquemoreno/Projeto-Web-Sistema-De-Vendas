@@ -80,9 +80,9 @@ namespace Projeto_SistemaWeb.Controllers
                 await _seller.RemoveAsync(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch(IntegridadeDeAcessoException e)
+            catch(IntegridadeDeAcessoException)
             {
-                return RedirectToAction(nameof(Error), new { message = e.Message });
+                return RedirectToAction(nameof(Error), new { message = "Erro de integridade referencial. O vendedor em questão possue vendas e não pode ser excluido" });
             }
 
         }
@@ -111,6 +111,7 @@ namespace Projeto_SistemaWeb.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não providenciado!" });
             }
+
             var obj = await _seller.EncontraPorIDAsync(id.Value);
 
             if(obj == null)
@@ -120,13 +121,14 @@ namespace Projeto_SistemaWeb.Controllers
 
             List<Department> listdepartamentos = await _departmentService.FindAllAsync();
             SellerFormViewMoldel viewModel = new SellerFormViewMoldel { Seller = obj, Departments = listdepartamentos };
+
             return View(viewModel);
             
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Seller seller)
+        public async Task<IActionResult> Edit(int? id, Seller seller)
         {
             if (!ModelState.IsValid) // previne que o usuario faça a edição dos dados sem as regras de negocios inpostas
             {
@@ -135,10 +137,11 @@ namespace Projeto_SistemaWeb.Controllers
                 return View(viewModel);
             }
 
-            if (id != seller.Id)
+            if (id != seller.Id && id != null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Ids não correspondem!" });
             }
+
             try
             {
                 await _seller.UpdateAsync(seller);

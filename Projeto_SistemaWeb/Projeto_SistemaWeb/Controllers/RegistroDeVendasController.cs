@@ -35,6 +35,7 @@ namespace Projeto_SistemaWeb.Controllers
             ViewData["dataMaxima"] = dataMaxima.Value.ToString("yyyy-MM-dd");
 
             var resultado = await _registroVendaService.BuscaPorDataAsync(dataMinima, dataMaxima);
+
             return View(resultado);
         }
 

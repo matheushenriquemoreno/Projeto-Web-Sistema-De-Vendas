@@ -4,24 +4,28 @@
     ViewData["Title"] = "Excluir";
 }
 
-<h2>@ViewData["Title"]</h2>
 
-<h3>Deseja Excluir esse Departamento?</h3>
+
+
 <div class="row">
 
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Excluir" class="btn btn-danger"/> |
-        <a asp-action="Index" class="btn btn-default">Retornar</a>
-    </form>
+    <div class="row">
+        <h2>@ViewData["Title"]</h2>
+        <h3>Deseja Excluir esse Departamento?</h3>
+        <hr />
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Name):
+            </dt>
+            <dd class="textoDelete">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Excluir" class="btn btn-danger" /> |
+            <a asp-action="Index" class="btn btn-default">Retornar</a>
+        </form>
+    </div>
 </div>

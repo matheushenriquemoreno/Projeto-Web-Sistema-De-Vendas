@@ -1,0 +1,89 @@
+﻿
+
+.data_cor {
+    color:#ffffff;
+    margin: 5px;
+    font-size: 18px;
+}
+
+.textoDelete {
+    font-size: 200px;
+}
+
+
+
+#PaginaInicial {
+    font-size: 25px;
+}
+
+
+.nav_barPersonalizada {
+    padding: 5px;
+    font-size: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    background-color: #ffffff;
+    Width: 900px;
+    margin: 10px auto;
+    padding: 10px;
+    position: relative;
+}
+
+#imagem {
+    width: 330px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.h1_modificada {
+    text-align: center;
+    color: #000000;
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.corlink {
+    padding: 15px;
+    margin: 10px;
+    background-color: #d7d7d7;
+    border-radius: 80%;
+    font-size: 25px;
+}
+
+
+a {
+    text-decoration: none;
+    color:black;
+}
+
+  a:link, a:visited {
+        color: black;
+        text-decoration: none;
+ }
+
+a:hover {
+        color:#1b00ce;        
+}
+
+.links {
+    clear: both;
+    text-align: center;
+    padding: 15px;
+}
+
+.texto {
+    margin-top: 140px;
+    margin-right: 10px;
+    padding: 10px;
+    position: center;
+    width: 500px;
+    float: right;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+}
