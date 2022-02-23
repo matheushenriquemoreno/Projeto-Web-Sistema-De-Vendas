@@ -14,12 +14,11 @@ O MVC e um padrão de arquitetura que divide uma aplicação web em três Camada
 <hr>
 
 <h3>
-Controller: Receber todas as requisições da view e faz seu processamento utilizando do protocolo HTTP, e as classes que implementamos para retornar ou tratar os dados recebidos. 
-</h3>
+Controller: Recebe todas as requisições da view e faz o processamento retornando dados que o usuario fornece ou repassando dados pra outras camadas da aplicação. 
 <hr>
 
 <h3>
-View:  E a camada onde acontece a interação com o usuário, onde acontece a exibição de dados através de HTML, XML ou Json como em algumas APIS, As views dentro do .NET podem ser dos seguintes tipos: View, Partial view, e templates, onde todas se completam pra fazer uma tela.
+View: E a camada onde ocorre a interação com o usuário, onde acontece a exibição de dados através de HTML, XML ou Json como em algumas APIS, As views dentro do .NET podem ser dos seguintes tipos: View, Partial view, e templates, onde todas se completam pra fazer uma tela.
 </h3> 
 <hr>
 
