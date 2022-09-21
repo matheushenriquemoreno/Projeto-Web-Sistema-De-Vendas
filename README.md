@@ -3,7 +3,7 @@
 
 
 <h2>
-O objetivo do Projeto foi o Desenvolver uma aplicação simples Utilizando o framework ASP .NET Core com o padrão de arquitetura/projeto MVC, para persistência dos dados foi utilizado o Entity framework, o banco de dados utilizado em questão foi MySQL.
+O objetivo do Projeto foi Desenvolver uma aplicação simples Utilizando o framework ASP .NET Core com o padrão de arquitetura/projeto MVC, para persistência dos dados foi utilizado o Entity framework, o banco de dados utilizado em questão foi MySQL.
 </h2>
 
 <h2>Contextualizando o padrão de Projeto MVC:</h2> 
